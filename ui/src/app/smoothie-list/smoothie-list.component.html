@@ -1,0 +1,6 @@
+Smoothie List
+<div *ngFor="let smoothie of smoothies">
+  <app-smoothie [smoothie]="smoothie"></app-smoothie>
+</div>
+
+<mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="add_circle" (click)="addSmoothie()"></mat-icon>

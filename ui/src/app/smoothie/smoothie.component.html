@@ -1,0 +1,23 @@
+<mat-card>
+  <mat-card-header>
+    {{smoothie.name}}<br>
+  </mat-card-header>
+  {{smoothie.id}}<br>
+
+  {{smoothie.img}}<br>
+  {{smoothie.nutritions}}
+
+</mat-card>
+
+<form [formGroup]="smoothieFormGroup" (ngSubmit)="onSubmit()">
+
+<label for="name">Name: </label>
+<input id="name" type="text" formControlName="name">
+
+
+  <label for="img">Img: </label>
+  <input id="img" type="text" formControlName="img">
+
+  <button type="submit" [disabled]="!smoothieFormGroup.valid">Submit</button>
+
+</form><mat-icon (click)="onDelete()">delete</mat-icon>
