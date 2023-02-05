@@ -23,6 +23,11 @@ public class Controller {
         return Flux.fromIterable(smoothieService.getAll());
     }
 
+    @GetMapping("/admin")
+    public Flux<Smoothie> listAsAdmin() {
+        return Flux.fromIterable(smoothieService.getAll());
+    }
+
     @GetMapping("/{id}")
     public Mono<Smoothie> get(
             @PathVariable String id
@@ -34,18 +39,18 @@ public class Controller {
                 );
     }
 
-    @PutMapping
-    public void update(
+    @PutMapping("/admin")
+    public void upsert(
             @RequestBody Smoothie smoothie
     ) {
         System.out.println(smoothie);
         this.smoothieService.update(smoothie);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/admin")
     public void delete(
             @RequestBody Smoothie smoothie
-    ){
+    ) {
         this.smoothieService.delete(smoothie);
     }
 

@@ -1,6 +1,12 @@
-Smoothie List
+<h1>Smoothie App</h1>
 <div *ngFor="let smoothie of smoothies">
-  <app-smoothie [smoothie]="smoothie"></app-smoothie>
+  <app-smoothie (delete)="onDelete($event)" [smoothie]="smoothie"></app-smoothie>
 </div>
 
-<mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="add_circle" (click)="addSmoothie()"></mat-icon>
+<mat-icon
+  aria-hidden="false"
+  aria-label="Example home icon"
+  fontIcon="add_circle"
+  (click)="addSmoothie()">
+
+</mat-icon>

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Smoothie} from "../../model/smoothie";
 import {MatCardModule} from '@angular/material/card';
 import {FormControl, FormGroup} from "@angular/forms";
@@ -19,6 +19,9 @@ export class SmoothieComponent implements OnInit {
 
   @Input() public smoothie: any = null;
 
+  @Output()
+  public delete: EventEmitter<string> = new EventEmitter<string>();
+
   public smoothieFormGroup!: FormGroup;
 
   ngOnInit(): void {
@@ -34,13 +37,17 @@ export class SmoothieComponent implements OnInit {
   public onSubmit() {
     console.log(this.smoothieFormGroup.value)
 
-    this.httpClient.put("http://localhost:8080/api", this.smoothieFormGroup.value)
+    this.httpClient.put("http://localhost:8080/api/admin/", this.smoothieFormGroup.value, {withCredentials:true})
       .subscribe(msg => console.log(msg));
   }
 
   public onDelete() {
-    this.httpClient.delete("http://localhost:8080/api", {body: this.smoothieFormGroup.value})
-      .subscribe(msg => console.log(msg))
+    this.httpClient.delete("http://localhost:8080/api/admin/", {body: this.smoothieFormGroup.value, withCredentials:true})
+      .subscribe(msg => {
+        console.log(msg);
+        this.delete.emit(this.smoothieFormGroup.value.id)
+      })
+
 
   }
 

@@ -15,7 +15,7 @@ export class SmoothieListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.http.get<Smoothie[]>("http://localhost:8080/api")
+    this.http.get<Smoothie[]>("http://localhost:8080/api/")
       .subscribe((data) => {
         this.smoothies = data;
       });
@@ -23,6 +23,10 @@ export class SmoothieListComponent implements OnInit {
 
   addSmoothie() {
     this.smoothies.push({name: "", img: "", nutrition: ""})
+  }
+
+  onDelete(event: string){
+    this.smoothies = this.smoothies.filter(smoothie => smoothie.id != event);
   }
 
 
