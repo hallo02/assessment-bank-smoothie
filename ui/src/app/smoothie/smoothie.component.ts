@@ -3,6 +3,10 @@ import {Smoothie} from "../../model/smoothie";
 import {MatCardModule} from '@angular/material/card';
 import {FormControl, FormGroup} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {Router} from "@angular/router";
+import {AuthService} from "../auth.service";
+import {environment} from "../../environment";
 
 @Component({
   selector: 'app-smoothie',
@@ -11,18 +15,30 @@ import {HttpClient} from "@angular/common/http";
 })
 export class SmoothieComponent implements OnInit {
 
-  private readonly httpClient: HttpClient
-
-  constructor(httpClient: HttpClient) {
-    this.httpClient = httpClient;
-  }
+  private readonly httpClient: HttpClient;
+  private readonly router: Router;
 
   @Input() public smoothie: any = null;
 
   @Output()
   public delete: EventEmitter<string> = new EventEmitter<string>();
 
+  @Output()
+  public update: EventEmitter<string> = new EventEmitter<string>();
+
   public smoothieFormGroup!: FormGroup;
+
+  public isAuth$ = this.authService.login.asObservable();
+
+  constructor(
+    httpClient: HttpClient,
+    router: Router,
+    private authService: AuthService
+  ) {
+    this.httpClient = httpClient;
+    this.router = router;
+  }
+
 
   ngOnInit(): void {
     this.smoothieFormGroup = new FormGroup({
@@ -30,19 +46,29 @@ export class SmoothieComponent implements OnInit {
       id: new FormControl(this.smoothie.id),
       name: new FormControl(this.smoothie.name),
       img: new FormControl(this.smoothie.img),
-      nutrition: new FormControl(this.smoothie.nutritions)
+      carbohydrates: new FormControl(this.smoothie.carbohydrates),
+      fat: new FormControl(this.smoothie.fat),
+      protein: new FormControl(this.smoothie.protein)
     })
   }
 
   public onSubmit() {
     console.log(this.smoothieFormGroup.value)
 
-    this.httpClient.put("http://localhost:8080/api/admin/", this.smoothieFormGroup.value, {withCredentials:true})
-      .subscribe(msg => console.log(msg));
+    this.httpClient.put(environment.backendUrl+"/api/admin/", this.smoothieFormGroup.value, {withCredentials: true})
+      .subscribe(
+        msg => this.update.emit(this.smoothieFormGroup.value),
+
+        msg => window.location.href = environment.backendUrl+"/login",
+        () => console.log("complete")
+      )
   }
 
   public onDelete() {
-    this.httpClient.delete("http://localhost:8080/api/admin/", {body: this.smoothieFormGroup.value, withCredentials:true})
+    this.httpClient.delete(environment.backendUrl+"/api/admin/", {
+      body: this.smoothieFormGroup.value,
+      withCredentials: true
+    })
       .subscribe(msg => {
         console.log(msg);
         this.delete.emit(this.smoothieFormGroup.value.id)

@@ -1,23 +1,32 @@
-<mat-card>
-  <mat-card-header>
-    {{smoothie.name}}<br>
-  </mat-card-header>
-  {{smoothie.id}}<br>
-
-  {{smoothie.img}}<br>
-  {{smoothie.nutritions}}
-
-</mat-card>
-
 <form [formGroup]="smoothieFormGroup" (ngSubmit)="onSubmit()">
 
-<label for="name">Name: </label>
-<input id="name" type="text" formControlName="name">
+  <mat-form-field appearance="fill">
+    <mat-label>Name:</mat-label>
+    <input matInput id="name" type="text" formControlName="name" [readonly]="!(isAuth$ | async)">
+  </mat-form-field>
 
+  <mat-form-field appearance="fill">
+    <mat-label>Carbohydrates:</mat-label>
+    <input matInput id="carbohydrates" type="text" formControlName="carbohydrates" [readonly]="!(isAuth$ | async)">
+  </mat-form-field>
 
-  <label for="img">Img: </label>
-  <input id="img" type="text" formControlName="img">
+  <mat-form-field appearance="fill">
+    <mat-label>Fat:</mat-label>
+    <input matInput id="fat" type="text" formControlName="fat" [readonly]="!(isAuth$ | async)">
+  </mat-form-field>
 
-  <button type="submit" [disabled]="!smoothieFormGroup.valid">Submit</button>
+  <mat-form-field appearance="fill">
+    <mat-label>Protein:</mat-label>
+    <input matInput id="protein" type="text" formControlName="protein" [readonly]="!(isAuth$ | async)">
+  </mat-form-field>
 
-</form><mat-icon (click)="onDelete()">delete</mat-icon>
+  <button mat-fab extended color="primary" type="submit" [disabled]="!(isAuth$ | async)">
+    <mat-icon>save</mat-icon>
+    Save
+  </button>
+
+</form>
+
+<button (click)="onDelete()" mat-fab color="warn" aria-label="Delete" type="button" [disabled]="!(isAuth$ | async)">
+  <mat-icon>delete</mat-icon>
+</button>

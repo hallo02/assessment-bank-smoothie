@@ -1,10 +1,8 @@
-
-
-export interface Smoothie{
+export interface Smoothie {
   id?: string,
   name: string,
-
   img: string,
-
-  nutrition: string
+  carbohydrates: string,
+  fat: string,
+  protein: string
 }

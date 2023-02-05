@@ -39,10 +39,12 @@ public class SmoothiePersistence {
                         UPDATE SMOOTHIES 
                         SET name = ?, 
                         img = ?, 
-                        nutrition = ? 
+                        carbohydrates = ?,
+                        fat = ?,
+                        protein = ?
                         WHERE id = ?
                         """,
-                new String[]{smoothie.name(), smoothie.img(), smoothie.nutrition(), smoothie.id()}
+                new String[]{smoothie.name(), smoothie.img(), smoothie.carbohydrates(), smoothie.fat(), smoothie.protein(), smoothie.id()}
         );
     }
 
@@ -52,13 +54,15 @@ public class SmoothiePersistence {
         this.jdbcTemplate.update(connection -> {
                     PreparedStatement ps = connection.prepareStatement(
                             """
-                                    INSERT INTO SMOOTHIES (name, img, nutrition)
-                                    VALUES(?,?,?)
+                                    INSERT INTO SMOOTHIES (name, img, carbohydrates, fat, protein)
+                                    VALUES(?,?,?,?,?)
                                         """,
                             Statement.RETURN_GENERATED_KEYS);
                     ps.setString(1, smoothie.name());
                     ps.setString(2, smoothie.img());
-                    ps.setString(3, smoothie.nutrition());
+                    ps.setString(3, smoothie.carbohydrates());
+                    ps.setString(4, smoothie.fat());
+                    ps.setString(5, smoothie.protein());
                     return ps;
                 },
                 keyHolder
@@ -82,8 +86,9 @@ public class SmoothiePersistence {
                 rs.getString("id"),
                 rs.getString("name"),
                 rs.getString("img"),
-                rs.getString("nutrition")
+                rs.getString("carbohydrates"),
+                rs.getString("fat"),
+                rs.getString("protein")
         );
     }
-
 }

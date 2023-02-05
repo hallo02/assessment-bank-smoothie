@@ -90,7 +90,8 @@
                             <executable>ng</executable>
                             <arguments>
                                 <argument>build</argument>
-                                <argument>--base-href=/ui</argument>
+                                <argument>--configuration=production</argument>
+                                <argument>--base-href=/ui/</argument>
                             </arguments>
                         </configuration>
                         <goals>
@@ -109,7 +110,7 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.build.directory}/classes/resources/</outputDirectory>
+                            <outputDirectory>${project.build.directory}/classes/resources/ui/</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>${project.basedir}/ui/dist/smoothie-ui</directory>
