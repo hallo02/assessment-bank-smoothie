@@ -1,12 +1,11 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Smoothie} from "../../model/smoothie";
-import {MatCardModule} from '@angular/material/card';
 import {FormControl, FormGroup} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
-import {MatFormFieldModule} from '@angular/material/form-field';
 import {Router} from "@angular/router";
 import {AuthService} from "../auth.service";
 import {environment} from "../../environment";
+import {OrderServiceService} from "../order-service.service";
 
 @Component({
   selector: 'app-smoothie',
@@ -33,7 +32,8 @@ export class SmoothieComponent implements OnInit {
   constructor(
     httpClient: HttpClient,
     router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private orderService: OrderServiceService
   ) {
     this.httpClient = httpClient;
     this.router = router;
@@ -55,17 +55,21 @@ export class SmoothieComponent implements OnInit {
   public onSubmit() {
     console.log(this.smoothieFormGroup.value)
 
-    this.httpClient.put(environment.backendUrl+"/api/admin/", this.smoothieFormGroup.value, {withCredentials: true})
+    this.httpClient.put(environment.backendUrl + "/api/admin/", this.smoothieFormGroup.value, {withCredentials: true})
       .subscribe(
         msg => this.update.emit(this.smoothieFormGroup.value),
 
-        msg => window.location.href = environment.backendUrl+"/login",
+        msg => window.location.href = environment.backendUrl + "/login",
         () => console.log("complete")
       )
   }
 
+  addToBag(smoothie: Smoothie) {
+    this.orderService.addToShoppingCard(smoothie);
+  }
+
   public onDelete() {
-    this.httpClient.delete(environment.backendUrl+"/api/admin/", {
+    this.httpClient.delete(environment.backendUrl + "/api/admin/", {
       body: this.smoothieFormGroup.value,
       withCredentials: true
     })

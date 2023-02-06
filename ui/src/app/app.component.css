@@ -1,6 +1,12 @@
-#smoothie_list{
-  width:80%;
-  border: 10px solid black;
-  margin:auto;
+mat-card {
+  width: 80%;
+  margin: auto;
+  margin-top: 10px;
   padding: 10px;
+  min-width: 800px;
 }
+
+mat-icon {
+  margin: 10px;
+}
+

@@ -27,6 +27,17 @@
 
 </form>
 
-<button (click)="onDelete()" mat-fab color="warn" aria-label="Delete" type="button" [disabled]="!(isAuth$ | async)">
-  <mat-icon>delete</mat-icon>
-</button>
+<div id="btn-add-container">
+
+  <button (click)="addToBag(smoothie)" mat-fab color="secondary" aria-label="Delete" type="button"
+          [disabled]="!(smoothie.id)">
+    <mat-icon>add_shopping_cart</mat-icon>
+  </button>
+</div>
+<div id="btn-delete-container">
+  <button (click)="onDelete()" mat-mini-fab color="warn" aria-label="Delete" type="button"
+          [disabled]="!(isAuth$ | async)">
+    <mat-icon>delete</mat-icon>
+  </button>
+
+</div>

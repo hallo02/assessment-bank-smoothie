@@ -14,12 +14,18 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatBadgeModule} from "@angular/material/badge";
+import {MatDialogModule} from "@angular/material/dialog";
+import {ShoppingCartOverviewComponent} from './shopping-cart-overview/shopping-cart-overview.component';
+import {MatListModule} from "@angular/material/list";
 
 @NgModule({
   declarations: [
     AppComponent,
     SmoothieListComponent,
-    SmoothieComponent
+    SmoothieComponent,
+    ShoppingCartOverviewComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +38,11 @@ import {MatButtonModule} from "@angular/material/button";
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatToolbarModule,
+    MatBadgeModule,
+    MatDialogModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

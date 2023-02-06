@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Smoothie} from "../../model/smoothie";
-import {MatExpansionModule} from '@angular/material/expansion';
 import {AuthService} from "../auth.service";
 import {environment} from "../../environment";
+import {OrderServiceService} from "../order-service.service";
 
 @Component({
   selector: 'app-smoothie-list',
@@ -18,7 +18,9 @@ export class SmoothieListComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private authService: AuthService) {
+    private authService: AuthService,
+    private orderService: OrderServiceService
+  ) {
   }
 
   ngOnInit(): void {

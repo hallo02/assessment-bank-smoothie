@@ -1,7 +1,7 @@
 package ch.hallo02.assessments.bank.smoothie.domain;
 
-import ch.hallo02.assessments.bank.smoothie.persistence.SmoothiePersistence;
 import ch.hallo02.assessments.bank.smoothie.model.Smoothie;
+import ch.hallo02.assessments.bank.smoothie.persistence.SmoothiePersistence;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

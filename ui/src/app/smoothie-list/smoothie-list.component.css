@@ -1,3 +1,7 @@
-button{
-  margin:5px
+button {
+  margin: 5px;
+}
+
+#add-btn-container {
+  text-align: left;
 }

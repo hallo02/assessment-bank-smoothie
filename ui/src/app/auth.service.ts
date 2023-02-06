@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, catchError, EMPTY, empty, flatMap, interval, mergeMap, of, throwError} from "rxjs";
+import {BehaviorSubject, catchError, interval, mergeMap, of} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../environment";
 
@@ -12,7 +12,7 @@ export class AuthService {
     private httpClient: HttpClient
   ) {
     console.log("init");
-    interval(5000).pipe(
+    interval(1000).pipe(
       mergeMap(
         (msg) => this.httpClient.get(environment.backendUrl + "/api/admin", {withCredentials: true})
           .pipe(
@@ -24,6 +24,8 @@ export class AuthService {
       (msg) => {
         if (msg != "nok") {
           this.login.next(true)
+        } else {
+          this.login.next(false)
         }
       },
       (error) => console.log("nok")
