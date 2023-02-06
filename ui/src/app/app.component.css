@@ -9,4 +9,8 @@ mat-card {
 mat-icon {
   margin: 10px;
 }
+mat-divider{
+  margin:10px
+}
+
 

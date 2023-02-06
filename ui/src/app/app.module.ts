@@ -19,6 +19,7 @@ import {MatBadgeModule} from "@angular/material/badge";
 import {MatDialogModule} from "@angular/material/dialog";
 import {ShoppingCartOverviewComponent} from './shopping-cart-overview/shopping-cart-overview.component';
 import {MatListModule} from "@angular/material/list";
+import {MatDividerModule} from "@angular/material/divider";
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import {MatListModule} from "@angular/material/list";
     MatToolbarModule,
     MatBadgeModule,
     MatDialogModule,
-    MatListModule
+    MatListModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
