@@ -8,3 +8,9 @@ spring:
     driverClassName: org.h2.Driver
   jpa:
     spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+
+app:
+  #  backend-url: http://ec2-34-244-231-78.eu-west-1.compute.amazonaws.com:8080
+  backend-url: http://localhost:4200
+  login-success-handler-url: ${app.backend-url}/ui
+  allowed-origins: ${app.backend-url}, http://localhost:4200, http://localhost:8080

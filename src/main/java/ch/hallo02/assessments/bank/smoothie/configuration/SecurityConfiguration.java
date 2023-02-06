@@ -19,6 +19,12 @@ import org.springframework.web.reactive.config.WebFluxConfigurerComposite;
 @Configuration
 public class SecurityConfiguration {
 
+    private final AppProperties appProperties;
+
+    public SecurityConfiguration(AppProperties appProperties) {
+        this.appProperties = appProperties;
+    }
+
     @Bean
     public MapReactiveUserDetailsService userDetailsService() {
         UserDetails user = User.withDefaultPasswordEncoder()
@@ -39,7 +45,11 @@ public class SecurityConfiguration {
                         .pathMatchers("/ui/**").permitAll()
                         .anyExchange().denyAll()
                         .and().formLogin()
-                        .authenticationSuccessHandler(new RedirectServerAuthenticationSuccessHandler("http://ec2-34-244-231-78.eu-west-1.compute.amazonaws.com:8080/ui"))
+                        .authenticationSuccessHandler(
+                                new RedirectServerAuthenticationSuccessHandler(
+                                        this.appProperties.getLoginSuccessHandlerUrl()
+                                )
+                        )
                         .and().csrf().disable()
 
                 );
@@ -54,9 +64,8 @@ public class SecurityConfiguration {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
                         .allowedOrigins(
-                                "http://localhost:4200",
-                                "http://localhost:8080",
-                                "http://ec2-34-244-231-78.eu-west-1.compute.amazonaws.com:8080")
+                                appProperties.getAllowedOrigins().toArray(new String[0])
+                        )
                         .allowedMethods("*")
                         .allowCredentials(true);
             }
