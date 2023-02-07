@@ -3,6 +3,7 @@ package ch.hallo02.assessments.bank.smoothie.configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.core.userdetails.MapReactiveUserDetailsService;
 import org.springframework.security.core.userdetails.User;
@@ -10,9 +11,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.security.web.server.authentication.RedirectServerAuthenticationSuccessHandler;
 import org.springframework.security.web.server.authentication.logout.RedirectServerLogoutSuccessHandler;
+import org.springframework.security.web.server.savedrequest.ServerRequestCache;
 import org.springframework.web.reactive.config.CorsRegistry;
 import org.springframework.web.reactive.config.WebFluxConfigurer;
 import org.springframework.web.reactive.config.WebFluxConfigurerComposite;
+import org.springframework.web.server.ServerWebExchange;
+import reactor.core.publisher.Mono;
 
 import java.net.URI;
 
@@ -55,24 +59,6 @@ public class SecurityConfiguration {
         return serverHttpSecurity.build();
     }
 
-    private RedirectServerAuthenticationSuccessHandler getRedirectServerAuthenticationSuccessHandler() {
-        return new RedirectServerAuthenticationSuccessHandler(
-                this.appProperties.getLoginSuccessHandlerUrl()
-        );
-    }
-
-    private RedirectServerLogoutSuccessHandler getRedirectServerLogoutSuccessHandler() {
-        RedirectServerLogoutSuccessHandler redirectServerLogoutSuccessHandler = null;
-        try {
-            redirectServerLogoutSuccessHandler = new RedirectServerLogoutSuccessHandler();
-            redirectServerLogoutSuccessHandler.setLogoutSuccessUrl(new URI(this.appProperties.getLoginSuccessHandlerUrl()));
-
-        } catch (Exception e) {
-            System.err.println(e);
-        }
-        return redirectServerLogoutSuccessHandler;
-    }
-
     @Bean
     public WebFluxConfigurer corsConfigurer() {
         return new WebFluxConfigurerComposite() {
@@ -87,5 +73,43 @@ public class SecurityConfiguration {
                         .allowCredentials(true);
             }
         };
+    }
+
+    private RedirectServerAuthenticationSuccessHandler getRedirectServerAuthenticationSuccessHandler() {
+
+        var redirectServerAuthenticationSuccessHandler = new RedirectServerAuthenticationSuccessHandler(
+                this.appProperties.getLoginSuccessHandlerUrl()
+        );
+        redirectServerAuthenticationSuccessHandler.setRequestCache(
+                new ServerRequestCache() {
+                    @Override
+                    public Mono<Void> saveRequest(ServerWebExchange exchange) {
+                        return null;
+                    }
+
+                    @Override
+                    public Mono<URI> getRedirectUri(ServerWebExchange exchange) {
+                        return Mono.empty();
+                    }
+
+                    @Override
+                    public Mono<ServerHttpRequest> removeMatchingRequest(ServerWebExchange exchange) {
+                        return null;
+                    }
+                }
+        );
+        return redirectServerAuthenticationSuccessHandler;
+    }
+
+    private RedirectServerLogoutSuccessHandler getRedirectServerLogoutSuccessHandler() {
+        RedirectServerLogoutSuccessHandler redirectServerLogoutSuccessHandler = null;
+        try {
+            redirectServerLogoutSuccessHandler = new RedirectServerLogoutSuccessHandler();
+            redirectServerLogoutSuccessHandler.setLogoutSuccessUrl(new URI(this.appProperties.getLoginSuccessHandlerUrl()));
+
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return redirectServerLogoutSuccessHandler;
     }
 }
