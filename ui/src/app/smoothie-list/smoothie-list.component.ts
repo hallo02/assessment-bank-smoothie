@@ -12,17 +12,25 @@ import {OrderServiceService} from "../order-service.service";
 })
 export class SmoothieListComponent implements OnInit {
 
+  /**************************************************************
+   **** Member variables
+   **************************************************************/
   public smoothies: Smoothie[] = [];
 
   public isAuth$ = this.authService.login.asObservable();
 
+  /**************************************************************
+   **** Constructor
+   **************************************************************/
   constructor(
     private http: HttpClient,
-    private authService: AuthService,
-    private orderService: OrderServiceService
+    private authService: AuthService
   ) {
   }
 
+  /**************************************************************
+   **** Lifecycle
+   **************************************************************/
   ngOnInit(): void {
     this.http.get<Smoothie[]>(environment.backendUrl + "/api/")
       .subscribe((data) => {
@@ -30,21 +38,22 @@ export class SmoothieListComponent implements OnInit {
       });
   }
 
-  addSmoothie() {
-    this.smoothies.push({name: "", img: "", carbohydrates: "", fat: "", protein: ""})
+  /**************************************************************
+   **** API
+   **************************************************************/
+
+  public addSmoothie() {
+    this.smoothies.push({name: "", slogan: "", carbohydrates: "", fat: "", protein: ""})
   }
 
-  onDelete(event: string) {
+  public onDelete(event: string) {
     this.smoothies = this.smoothies.filter(smoothie => smoothie.id != event);
   }
 
-  onUpdate(event: string) {
+  public onUpdate(event: string) {
     this.http.get<Smoothie[]>(environment.backendUrl + "/api/")
       .subscribe((data) => {
         this.smoothies = data;
       });
-
   }
-
-
 }

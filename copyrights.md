@@ -1,1 +1,0 @@
-## Images of smoothies: https://www.bettybossi.ch

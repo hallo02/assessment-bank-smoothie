@@ -20,13 +20,18 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {ShoppingCartOverviewComponent} from './shopping-cart-overview/shopping-cart-overview.component';
 import {MatListModule} from "@angular/material/list";
 import {MatDividerModule} from "@angular/material/divider";
+import { SmoothieToolbarComponent } from './smoothie-toolbar/smoothie-toolbar.component';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+import { DeleteDialogComponent } from './smoothie/delete-dialog/delete-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SmoothieListComponent,
     SmoothieComponent,
-    ShoppingCartOverviewComponent
+    ShoppingCartOverviewComponent,
+    SmoothieToolbarComponent,
+    DeleteDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +49,8 @@ import {MatDividerModule} from "@angular/material/divider";
     MatBadgeModule,
     MatDialogModule,
     MatListModule,
-    MatDividerModule
+    MatDividerModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

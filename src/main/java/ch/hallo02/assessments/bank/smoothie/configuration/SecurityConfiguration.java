@@ -29,8 +29,8 @@ public class SecurityConfiguration {
     @Bean
     public MapReactiveUserDetailsService userDetailsService() {
         UserDetails user = User.withDefaultPasswordEncoder()
-                .username("admin")
-                .password("admin")
+                .username(appProperties.getUser().getUsername())
+                .password(appProperties.getUser().getPassword())
                 .roles("ADMIN")
                 .build();
         return new MapReactiveUserDetailsService(user);

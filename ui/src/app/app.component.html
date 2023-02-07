@@ -1,17 +1,4 @@
-<mat-toolbar>
-  <span>Smoothie App</span>
-  <span class="example-spacer"></span>
-  <div style="width:80%"></div>
-  <mat-icon matBadge="{{itemCounter | async}}"
-            matBadgeColor="warn"
-            (click)="openShippingCart()">
-    shopping_cart
-  </mat-icon>
-  <div>
-    <mat-icon (click)="onLogin()">account_circle</mat-icon>
-    {{user$ | async}}
-  </div>
-</mat-toolbar>
+<app-smoothie-toolbar></app-smoothie-toolbar>
 
 <mat-card class="example-card">
   <mat-card-content>

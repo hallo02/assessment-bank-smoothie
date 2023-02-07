@@ -34,9 +34,7 @@ public class Controller {
     ) {
         return smoothieService.getById(id)
                 .map(Mono::just)
-                .orElseGet(
-                        () -> Mono.error(new RuntimeException("Smoothie not found"))
-                );
+                .orElseGet(Mono::empty);
     }
 
     @PutMapping("/admin")

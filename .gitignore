@@ -1,12 +1,9 @@
 target
 *.iml
-.DS_STORE
 .angular
-dist
-node_modules
 *.pem
 *.jar
-
+notes.md
 
 # Compiled output
 /dist
