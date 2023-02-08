@@ -1,0 +1,19 @@
+#btn-add-container {
+  text-align: left;
+}
+
+#btn-delete-container {
+  text-align: right;
+}
+
+mat-form-field {
+  margin: 5px;
+}
+
+.save-delete-btns {
+  width: auto;
+}
+
+.slogan {
+  width: 100%
+}

@@ -1,0 +1,12 @@
+button {
+  margin: 5px;
+}
+
+.add-btn-container {
+  text-align: left;
+  margin-top: 20px;
+}
+
+mat-icon {
+  margin-right: 10px;
+}

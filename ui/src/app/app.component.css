@@ -1,0 +1,17 @@
+mat-card {
+  width: 80%;
+  margin: auto;
+  margin-top: 10px;
+  padding: 10px;
+  min-width: 500px;
+}
+
+mat-icon {
+  margin: 10px;
+}
+
+mat-divider {
+  margin: 10px
+}
+
+

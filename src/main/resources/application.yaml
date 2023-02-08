@@ -1,0 +1,19 @@
+spring:
+  h2:
+    console.enabled: true
+  datasource:
+    url: jdbc:h2:mem:mydb
+    username: sa
+    password: password
+    driverClassName: org.h2.Driver
+  jpa:
+    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+
+app:
+  backend-url: https://smoothie.thomasdobler.ch
+  #backend-url: http://localhost:4200
+  login-success-handler-url: ${app.backend-url}/ui
+  allowed-origins: ${app.backend-url}, http://localhost:4200, http://localhost:8080
+  user:
+    username: admin
+    password: admin!!smoothie

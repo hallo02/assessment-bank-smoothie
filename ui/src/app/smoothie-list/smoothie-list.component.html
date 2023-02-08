@@ -1,0 +1,34 @@
+<mat-accordion class="example-headers-align" multi>
+
+  <mat-expansion-panel *ngFor="let smoothie of smoothies">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-icon>local_drink</mat-icon>
+        {{smoothie.name}}
+      </mat-panel-title>
+      <mat-panel-description>
+        <i>{{smoothie.slogan?.substring(0, 40)}}...</i>
+      </mat-panel-description>
+
+    </mat-expansion-panel-header>
+
+    <app-smoothie (update)="onUpdate($event)"
+                  (delete)="onDelete($event)"
+                  [smoothie]="smoothie">
+
+    </app-smoothie>
+
+  </mat-expansion-panel>
+</mat-accordion>
+<div class="add-btn-container">
+  <button (click)="addSmoothie()"
+          mat-fab
+          extended
+          color="primary"
+          aria-label="Add"
+          type="submit"
+          *ngIf="isAuth$ | async">
+    <mat-icon>add_circle</mat-icon>
+    Add new smoothie
+  </button>
+</div>
