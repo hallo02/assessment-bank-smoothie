@@ -30,7 +30,8 @@
   </mat-form-field>
 
   <div class="save-delete-btns">
-    <button mat-fab extended color="primary" type="submit" [disabled]=!smoothieFormGroup.valid *ngIf="!!(isAuth$ | async)">
+    <button mat-fab extended color="primary" type="submit" [disabled]=!smoothieFormGroup.valid
+            *ngIf="!!(isAuth$ | async)">
       <mat-icon>save</mat-icon>
       Save
     </button>

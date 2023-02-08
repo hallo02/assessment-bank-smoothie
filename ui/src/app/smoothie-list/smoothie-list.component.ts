@@ -3,7 +3,6 @@ import {HttpClient} from "@angular/common/http";
 import {Smoothie} from "../../model/smoothie";
 import {AuthService} from "../auth.service";
 import {environment} from "../../environment";
-import {OrderServiceService} from "../order-service.service";
 
 @Component({
   selector: 'app-smoothie-list',

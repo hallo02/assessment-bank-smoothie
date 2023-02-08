@@ -97,7 +97,7 @@ export class SmoothieComponent implements OnInit {
     this._dialog.open(DeleteDialogComponent, {
       width: '250px'
     }).afterClosed().subscribe(deleteDecision => {
-      if (deleteDecision!="true") {
+      if (deleteDecision != "true") {
         return
       }
       this._httpClient.delete(environment.backendUrl + "/api/admin/", {

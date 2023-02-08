@@ -20,9 +20,9 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {ShoppingCartOverviewComponent} from './shopping-cart-overview/shopping-cart-overview.component';
 import {MatListModule} from "@angular/material/list";
 import {MatDividerModule} from "@angular/material/divider";
-import { SmoothieToolbarComponent } from './smoothie-toolbar/smoothie-toolbar.component';
+import {SmoothieToolbarComponent} from './smoothie-toolbar/smoothie-toolbar.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
-import { DeleteDialogComponent } from './smoothie/delete-dialog/delete-dialog.component';
+import {DeleteDialogComponent} from './smoothie/delete-dialog/delete-dialog.component';
 
 @NgModule({
   declarations: [

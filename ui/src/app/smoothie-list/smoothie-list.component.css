@@ -4,8 +4,9 @@ button {
 
 .add-btn-container {
   text-align: left;
-  margin-top:20px;
+  margin-top: 20px;
 }
-mat-icon{
-  margin-right:10px;
+
+mat-icon {
+  margin-right: 10px;
 }
