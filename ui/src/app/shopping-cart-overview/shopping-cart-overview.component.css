@@ -1,0 +1,17 @@
+div {
+  margin: 10px
+}
+
+.left-50px {
+  margin-left: 50px;
+}
+
+.empty-indication {
+  text-align: center;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

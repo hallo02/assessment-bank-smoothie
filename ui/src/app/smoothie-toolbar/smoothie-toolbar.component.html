@@ -1,0 +1,23 @@
+<mat-toolbar>
+  <span>Smoothie Full Stack App</span>
+
+  <div style="width:70%"></div>
+
+  <div id="right-side-icons">
+    <mat-icon *ngIf="(user$ | async) == '[End User]'" class="mat-icon-more-space"
+              matBadge="{{itemCounter | async}}"
+              matBadgeColor="warn"
+              (click)="openShippingCart()">
+      shopping_cart
+    </mat-icon>
+
+    <mat-icon>account_circle</mat-icon>
+    <br/>
+    <small>{{user$ | async}}</small>
+    <button (click)="onLogin()"
+            mat-raised-button
+            color="primary">
+      {{userAction$ | async}}
+    </button>
+  </div>
+</mat-toolbar>

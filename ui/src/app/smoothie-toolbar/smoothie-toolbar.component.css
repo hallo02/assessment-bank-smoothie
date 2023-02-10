@@ -1,0 +1,13 @@
+.mat-icon-more-space {
+  margin: 30px;
+}
+
+mat-icon {
+  cursor: default;
+}
+
+#right-side-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

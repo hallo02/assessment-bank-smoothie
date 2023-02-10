@@ -1,0 +1,32 @@
+<mat-list role="list">
+  <div mat-subheader>Smoothies in shopping cart:</div>
+  <ng-container *ngFor="let shoppingCartItem of shoppingCartItems$ | async">
+    <mat-list-item role="listitem">
+      <div class="item">
+        <mat-icon>local_drink</mat-icon>
+        <small>{{shoppingCartItem.smoothie.name}}</small>
+
+        <mat-icon (click)="onShoppingCardItemDelete(shoppingCartItem)"
+                  class="left-50px"
+                  color="warn">
+          delete
+        </mat-icon>
+      </div>
+    </mat-list-item>
+  </ng-container>
+</mat-list>
+
+<div>
+  <button *ngIf="(shoppingCartItems$ | async)!.length>0"
+          mat-fab
+          extended
+          color="secondary"
+          aria-label="addToShoppingCart"
+          type="button">
+    <mat-icon>shopping_cart_checkout</mat-icon>
+    Checkout (not implemented)
+  </button>
+</div>
+<div class="empty-indication" *ngIf="(shoppingCartItems$ | async)!.length==0">
+  Shopping cart is empty
+</div>
